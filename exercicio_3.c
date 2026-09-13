@@ -57,9 +57,10 @@ int main()
          }
          break;
       case 4:
-
+         allocateVehicle(cars, totalVehicles);
          break;
       case 5:
+         deallocateVehicle(cars, totalVehicles);
          break;
       case 6:
          break;
@@ -183,4 +184,50 @@ char getplate()
    car[strcspn(car, "\n")] = "\0";
 
    return car;
+}
+
+void allocateVehicle(Car cars_list[], int total_vehicles)
+{
+   char plate = getplate();
+   int search = search_plate(cars_list, plate, total_vehicles);
+
+   if (search == -1)
+   {
+      printf("===VEICULO NAO ENCONTRADO===");
+   }
+   else
+   {
+      if (cars_list[search].disp == 'N')
+      {
+         cars_list[search].disp = 'S';
+         printf("\n+++VEICULO ALOCADO COM SUCESSO+++\n");
+      }
+      else
+      {
+         printf("\n===O VEICULO JÁ ESTA ALOCADO===");
+      }
+   }
+}
+
+void deallocateVehicle(Car cars_list[], int total_vehicles)
+{
+   char plate = getplate();
+   int search = search_plate(cars_list, plate, total_vehicles);
+
+   if (search == -1)
+   {
+      printf("===VEICULO NAO ENCONTRADO===");
+   }
+   else
+   {
+      if (cars_list[search].disp == 'S')
+      {
+         cars_list[search].disp = 'S';
+         printf("\n+++VEICULO DESALOCADO COM SUCESSO+++\n");
+      }
+      else
+      {
+         printf("\n===O VEICULO NÃO ESTÁ ALOCADO===");
+      }
+   }
 }
